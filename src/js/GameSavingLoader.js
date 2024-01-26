@@ -13,10 +13,13 @@ export default class GameSavingLoader {
    * @static
    * @returns {object} экземпляр класса GameSaving
    */
-  static load() {
-    return read()
-      .then((data) => json(data))
-      .then((save) => new GameSaving(JSON.parse(save)))
-      .catch((error) => error);
+  static async load() {
+    try {
+      const response = await read();
+      const data = await json(response);
+      return new GameSaving(JSON.parse(data));
+    } catch (error) {
+      return new Error(error);
+    }
   }
 }
