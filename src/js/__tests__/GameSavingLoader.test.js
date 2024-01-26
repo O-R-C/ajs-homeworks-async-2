@@ -12,6 +12,6 @@ describe('load()', () => {
     const mock = jest.spyOn(customRead, 'default');
     mock.mockImplementation(() => Promise.reject('error'));
 
-    return expect(GameSavingLoader.load()).resolves.toBe('error');
+    return expect(GameSavingLoader.load()).resolves.toEqual(new Error('error'));
   });
 });
